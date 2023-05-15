@@ -7,13 +7,21 @@ const BREAK_TIME_MINUTES = 0.2 * 60 * 1000;
 
 export default function App() {
   const [timerCount, setTimerCount] = useState(FOCUS_TIME_MINUTES);
+  const [timerInterval, setTimerInterval] = useState<NodeJS.Timer | null>(null);
   const startTimer = () => {
-    setInterval(() => setTimerCount((prev) => prev - 1000), 1000);
+    const id = setInterval(() => setTimerCount((prev) => prev - 1000), 1000);
+    setTimerInterval(id);
+  };
+  const stopTimer = () => {
+    if (timerInterval) {
+      clearInterval(timerInterval);
+    }
   };
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
       <Button title="Start timer" onPress={() => startTimer()} />
+      <Button title="Stop timer" onPress={() => stopTimer()} />
       <Text>{timerCount}</Text>
     </View>
   );
