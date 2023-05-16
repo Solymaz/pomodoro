@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
+import TimerDisplay from "./TimerDisplay";
 
 const FOCUS_TIME_MINUTES = 0.2 * 60 * 1000;
 const BREAK_TIME_MINUTES = 0.2 * 60 * 1000;
@@ -17,12 +18,13 @@ export default function App() {
       clearInterval(timerInterval);
     }
   };
+  const timerDate = new Date(timerCount);
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
       <Button title="Start timer" onPress={() => startTimer()} />
       <Button title="Stop timer" onPress={() => stopTimer()} />
-      <Text>{timerCount}</Text>
+      <TimerDisplay timerDate={timerDate} />
     </View>
   );
 }
