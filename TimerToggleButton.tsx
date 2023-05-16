@@ -13,15 +13,31 @@ export default function TimerToggleButton({
   startTimer,
 }: Props): JSX.Element {
   return (
-    <Pressable>
-      <View>
+    <Pressable style={styles.icon}>
+      <View style={styles.container}>
         <FontAwesome
           name={isTimerRunning ? "pause" : "play"}
           size={125}
-          color="red"
           onPress={isTimerRunning ? stopTimer : startTimer}
+          style={styles.icon}
         />
       </View>
     </Pressable>
   );
 }
+
+const styles = StyleSheet.create({
+  icon: {
+    alignSelf: "center",
+    color: "#fff",
+  },
+  container: {
+    borderWidth: 5,
+    width: 250,
+    height: 250,
+    borderRadius: 250 / 2,
+    justifyContent: "center",
+    borderColor: "#fff",
+    marginVertical: 50,
+  },
+});
