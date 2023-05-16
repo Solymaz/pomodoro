@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
-
+import { StyleSheet, Text, View, Pressable } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
 type Props = {
   isTimerRunning: boolean;
   stopTimer: () => void;
@@ -13,9 +13,15 @@ export default function TimerToggleButton({
   startTimer,
 }: Props): JSX.Element {
   return (
-    <Button
-      title={isTimerRunning ? "Stop" : "Start"}
-      onPress={isTimerRunning ? stopTimer : startTimer}
-    />
+    <Pressable>
+      <View>
+        <FontAwesome
+          name={isTimerRunning ? "pause" : "play"}
+          size={125}
+          color="red"
+          onPress={isTimerRunning ? stopTimer : startTimer}
+        />
+      </View>
+    </Pressable>
   );
 }
