@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import TimerDisplay from "./TimerDisplay";
+import TimerToggleButton from "./TimerToggleButton";
 
 const FOCUS_TIME_MINUTES = 0.2 * 60 * 1000;
 const BREAK_TIME_MINUTES = 0.2 * 60 * 1000;
@@ -25,9 +26,10 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <Button
-        title={isTimerRunning ? "Stop" : "Start"}
-        onPress={isTimerRunning ? stopTimer : startTimer}
+      <TimerToggleButton
+        isTimerRunning={isTimerRunning}
+        startTimer={startTimer}
+        stopTimer={stopTimer}
       />
       <TimerDisplay timerDate={timerDate} />
     </View>
