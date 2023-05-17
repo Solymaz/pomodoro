@@ -18,7 +18,8 @@ export default function TimerDisplay({ timerDate }: Props): JSX.Element {
 
 const styles = StyleSheet.create({
   styledText: {
-    fontSize: 30,
-    fontWeight: "700",
+    fontSize: 40,
+    fontWeight: "800",
+    color: "#fff",
   },
 });

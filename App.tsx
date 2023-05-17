@@ -1,11 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import TimerDisplay from "./TimerDisplay";
 import TimerToggleButton from "./TimerToggleButton";
 
-const FOCUS_TIME_MINUTES = 0.2 * 60 * 1000;
-const BREAK_TIME_MINUTES = 0.2 * 60 * 1000;
+const FOCUS_TIME_MINUTES = 0.1 * 60 * 1000;
+const BREAK_TIME_MINUTES = 0.1 * 60 * 1000;
 
 export default function App() {
   const [timerCount, setTimerCount] = useState(FOCUS_TIME_MINUTES);
@@ -39,9 +39,14 @@ export default function App() {
   };
   const timerDate = new Date(timerCount);
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        timerMode === "Focus" ? styles.focusMode : styles.breakMode,
+      ]}
+    >
       <StatusBar style="auto" />
-      <Text>{timerMode == "Focus" ? "Ready to Focus" : "Break time"}</Text>
+      <Text>{timerMode === "Focus" ? "Focus Time" : "Break Time"}</Text>
       <TimerToggleButton
         isTimerRunning={isTimerRunning}
         startTimer={startTimer}
@@ -58,5 +63,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#d95550",
     alignItems: "center",
     justifyContent: "center",
+  },
+  focusMode: {
+    backgroundColor: "#d95550",
+  },
+  breakMode: {
+    backgroundColor: "#2a9d8f",
   },
 });
