@@ -5,10 +5,10 @@ type Props = {
   timerDate: Date;
 };
 
-export default function TimerDisplay({ timerDate }: Props): JSX.Element {
+export default function CountdownDisplay({ timerDate }: Props): JSX.Element {
   return (
     <View>
-      <Text style={styles.styledText}>
+      <Text style={styles.text}>
         {timerDate.getMinutes().toString().padStart(2, "0")}:
         {timerDate.getSeconds().toString().padStart(2, "0")}
       </Text>
@@ -17,7 +17,7 @@ export default function TimerDisplay({ timerDate }: Props): JSX.Element {
 }
 
 const styles = StyleSheet.create({
-  styledText: {
+  text: {
     fontSize: 40,
     fontWeight: "800",
     color: "#fff",

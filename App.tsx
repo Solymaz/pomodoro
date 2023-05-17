@@ -1,17 +1,18 @@
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
-import TimerDisplay from "./TimerDisplay";
+import { StyleSheet, Text, View } from "react-native";
+import CountdownDisplay from "./CountdownDisplay";
+import TimerMode, { TimerModes } from "./TimerMode";
 import TimerToggleButton from "./TimerToggleButton";
 
 const FOCUS_TIME_MINUTES = 0.1 * 60 * 1000;
-const BREAK_TIME_MINUTES = 0.1 * 60 * 1000;
+const BREAK_TIME_MINUTES = 0.05 * 60 * 1000;
 
 export default function App() {
   const [timerCount, setTimerCount] = useState(FOCUS_TIME_MINUTES);
   const [timerInterval, setTimerInterval] = useState<NodeJS.Timer | null>(null);
   const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
-  const [timerMode, setTimerMode] = useState<"Focus" | "Break">("Focus");
+  const [timerMode, setTimerMode] = useState<TimerModes>("Focus");
 
   useEffect(() => {
     if (timerCount === 0) {
@@ -46,13 +47,13 @@ export default function App() {
       ]}
     >
       <StatusBar style="auto" />
-      <Text>{timerMode === "Focus" ? "Focus Time" : "Break Time"}</Text>
+      <TimerMode timerMode={timerMode} />
       <TimerToggleButton
         isTimerRunning={isTimerRunning}
         startTimer={startTimer}
         stopTimer={stopTimer}
       />
-      <TimerDisplay timerDate={timerDate} />
+      <CountdownDisplay timerDate={timerDate} />
     </View>
   );
 }
