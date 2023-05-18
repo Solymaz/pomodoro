@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { StyleSheet, View, Pressable } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 type Props = {
   isTimerRunning: boolean;
