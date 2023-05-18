@@ -24,6 +24,11 @@ export default function App() {
                 />
               </Pressable>
             ),
+            title: "",
+            headerShadowVisible: false,
+            headerStyle: {
+              backgroundColor: "#d95550",
+            },
           })}
         />
         <Stack.Screen name="Settings" component={SettingsScreen} />
