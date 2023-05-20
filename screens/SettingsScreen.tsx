@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Text, TextInput, View } from "react-native";
 
 export default function SettingsScreen(): JSX.Element {
-  const [focusMinutes, setFocusMinutes] = useState<number>(25);
-  const [breakMinutes, setBreakMinutes] = useState<number>(5);
   return (
     <View accessible={true} accessibilityLanguage="en-EN">
       <Text nativeID="focus minutes">
@@ -21,14 +19,14 @@ export default function SettingsScreen(): JSX.Element {
       </Text>
       <TextInput
         value={breakMinutes.toString()}
-        onChangeText={(newTime) => setFocusMinutes(Number(newTime))}
+        onChangeText={(newTime) => setBreakMinutes(Number(newTime))}
         keyboardType="number-pad"
         accessibilityLabel="break minutes input"
         accessibilityLabelledBy="break minutes"
       />
       <Button
         title="Save"
-        onPress={() => onSumit(focusMinutes, breakMinutes)}
+        onPress={() => onsubmit(focusMinutes, breakMinutes)}
       />
     </View>
   );
