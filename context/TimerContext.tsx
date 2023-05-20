@@ -11,7 +11,12 @@ type Props = {
   children: JSX.Element;
 };
 
-export const TimerContext = createContext<TimerContextType | null>(null);
+export const TimerContext = createContext<TimerContextType>({
+  focusMinutes: 25,
+  setFocusMinutes: () => {},
+  breakMinutes: 5,
+  setBreakMinutes: () => {},
+});
 
 export default function TimerContextProvider({ children }: Props) {
   const [focusMinutes, setFocusMinutes] = useState<number>(25);

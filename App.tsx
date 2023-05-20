@@ -8,6 +8,11 @@ import TimerContextProvider from "./context/TimerContext";
 
 const Stack = createNativeStackNavigator();
 
+export type RootStackParamList = {
+  Home: undefined;
+  Settings: undefined;
+};
+
 export default function App() {
   return (
     <TimerContextProvider>

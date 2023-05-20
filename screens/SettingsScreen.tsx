@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Text, TextInput, View } from "react-native";
+import { TimerContext } from "../context/TimerContext";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../App";
 
-export default function SettingsScreen(): JSX.Element {
+type Props = NativeStackScreenProps<RootStackParamList, "Settings">;
+
+export default function SettingsScreen({ navigation }: Props): JSX.Element {
+  const { focusMinutes, setFocusMinutes, breakMinutes, setBreakMinutes } =
+    useContext(TimerContext);
   return (
     <View accessible={true} accessibilityLanguage="en-EN">
       <Text nativeID="focus minutes">
@@ -24,10 +31,7 @@ export default function SettingsScreen(): JSX.Element {
         accessibilityLabel="break minutes input"
         accessibilityLabelledBy="break minutes"
       />
-      <Button
-        title="Save"
-        onPress={() => onsubmit(focusMinutes, breakMinutes)}
-      />
+      <Button title="Done" onPress={() => navigation.pop()} />
     </View>
   );
 }
