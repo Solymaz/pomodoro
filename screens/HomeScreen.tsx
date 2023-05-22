@@ -15,7 +15,6 @@ export default function HomeScreen() {
   const [timerInterval, setTimerInterval] = useState<NodeJS.Timer | null>(null);
   const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
   const [timerMode, setTimerMode] = useState<TimerModes>("Focus");
-  console.log(focusMinutes);
 
   useEffect(() => {
     setFocusTimerCount(FocusMilliseconds);
