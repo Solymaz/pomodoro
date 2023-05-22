@@ -27,6 +27,7 @@ export default function SettingsScreen({ navigation }: Props): JSX.Element {
           accessibilityLabel="focus minutes input"
           accessibilityLabelledBy="focus minutes"
           style={styles.border}
+          clearTextOnFocus={true}
         />
       </View>
       <View style={[styles.break, styles.wrapper]}>
@@ -40,6 +41,7 @@ export default function SettingsScreen({ navigation }: Props): JSX.Element {
           accessibilityLabel="break minutes input"
           accessibilityLabelledBy="break minutes"
           style={styles.border}
+          clearTextOnFocus={true}
         />
       </View>
       <Pressable
