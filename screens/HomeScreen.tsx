@@ -1,36 +1,57 @@
 import { StatusBar } from "expo-status-bar";
-import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { useContext, useEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
 import CountdownDisplay from "../CountdownDisplay";
 import TimerMode, { TimerModes } from "../TimerMode";
 import TimerToggleButton from "../TimerToggleButton";
-
-const FOCUS_TIME_MINUTES = 0.1 * 60 * 1000;
-const BREAK_TIME_MINUTES = 0.05 * 60 * 1000;
+import { TimerContext } from "../context/TimerContext";
 
 export default function HomeScreen() {
-  const [timerCount, setTimerCount] = useState(FOCUS_TIME_MINUTES);
+  const { focusMinutes, breakMinutes } = useContext(TimerContext);
+  const FocusMilliseconds = focusMinutes * 60 * 1000;
+  const BreakMilliseconds = breakMinutes * 60 * 1000;
+  const [focusTimerCount, setFocusTimerCount] = useState(FocusMilliseconds);
+  const [breakTimerCount, setBreakTimerCount] = useState(BreakMilliseconds);
   const [timerInterval, setTimerInterval] = useState<NodeJS.Timer | null>(null);
   const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
   const [timerMode, setTimerMode] = useState<TimerModes>("Focus");
+  console.log(focusMinutes);
 
   useEffect(() => {
-    if (timerCount === 0) {
-      if (timerMode === "Focus") {
-        setTimerMode("Break");
-        setTimerCount(BREAK_TIME_MINUTES);
-      } else {
-        setTimerMode("Focus");
-        setTimerCount(FOCUS_TIME_MINUTES);
-      }
+    setFocusTimerCount(FocusMilliseconds);
+    setBreakTimerCount(BreakMilliseconds);
+  }, [focusMinutes, breakMinutes]);
+
+  // switch from focus to break mode and vis a vis when the timer is 0
+  useEffect(() => {
+    if (timerMode === "Focus" && focusTimerCount === 0) {
+      setTimerMode("Break");
+      setBreakTimerCount(BreakMilliseconds);
       stopTimer();
     }
-  }, [timerCount]);
+    if (timerMode === "Break" && breakTimerCount === 0) {
+      setTimerMode("Focus");
+      setFocusTimerCount(FocusMilliseconds);
+      stopTimer();
+    }
+  }, [focusTimerCount, breakTimerCount]);
 
   const startTimer = () => {
     setIsTimerRunning(true);
-    const id = setInterval(() => setTimerCount((prev) => prev - 1000), 1000);
-    setTimerInterval(id);
+    if (timerMode === "Focus") {
+      const id = setInterval(
+        () => setFocusTimerCount((prev) => prev - 1000),
+        1000
+      );
+      setTimerInterval(id);
+    }
+    if (timerMode == "Break") {
+      const id = setInterval(
+        () => setBreakTimerCount((prev) => prev - 1000),
+        1000
+      );
+      setTimerInterval(id);
+    }
   };
   const stopTimer = () => {
     if (timerInterval) {
@@ -38,7 +59,10 @@ export default function HomeScreen() {
     }
     setIsTimerRunning(false);
   };
-  const timerDate = new Date(timerCount);
+
+  const timerDate = new Date(
+    timerMode === "Focus" ? focusTimerCount : breakTimerCount
+  );
   return (
     <View
       style={[
