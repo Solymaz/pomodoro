@@ -2,19 +2,20 @@ import { StatusBar } from "expo-status-bar";
 import { useContext, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import CountdownDisplay from "../CountdownDisplay";
-import TimerMode, { TimerModes } from "../TimerMode";
 import TimerToggleButton from "../TimerToggleButton";
 import { TimerContext } from "../context/TimerContext";
+import { TimerModeContext } from "../context/TimerModeContext";
+import TimerMode from "../TimerMode";
 
 export default function HomeScreen() {
   const { focusMinutes, breakMinutes } = useContext(TimerContext);
+  const { timerMode, setTimerMode } = useContext(TimerModeContext);
   const FocusMilliseconds = focusMinutes * 60 * 1000;
   const BreakMilliseconds = breakMinutes * 60 * 1000;
   const [focusTimerCount, setFocusTimerCount] = useState(FocusMilliseconds);
   const [breakTimerCount, setBreakTimerCount] = useState(BreakMilliseconds);
   const [timerInterval, setTimerInterval] = useState<NodeJS.Timer | null>(null);
   const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
-  const [timerMode, setTimerMode] = useState<TimerModes>("Focus");
 
   useEffect(() => {
     setFocusTimerCount(FocusMilliseconds);
@@ -70,7 +71,7 @@ export default function HomeScreen() {
       ]}
     >
       <StatusBar style="auto" />
-      <TimerMode timerMode={timerMode} />
+      <TimerMode />
       <TimerToggleButton
         isTimerRunning={isTimerRunning}
         startTimer={startTimer}

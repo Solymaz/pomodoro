@@ -1,12 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { TimerModeContext } from "./context/TimerModeContext";
 
-export type TimerModes = "Focus" | "Break";
-type Props = {
-  timerMode: TimerModes;
-};
-
-export default function TimerMode({ timerMode }: Props): JSX.Element {
+export default function TimerMode(): JSX.Element {
+  const { timerMode } = useContext(TimerModeContext);
   return (
     <View style={styles.container}>
       <Text style={styles.text}>

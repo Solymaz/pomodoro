@@ -59,23 +59,6 @@ export default function SettingsScreen({ navigation }: Props): JSX.Element {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-  },
-  label: {
-    fontSize: 16,
-    marginVertical: 10,
-    paddingHorizontal: 10,
-    width: "100%",
-  },
-
-  button: {
-    marginTop: 30,
-  },
-  buttonText: {
-    textAlign: "center",
-    fontSize: 16,
-  },
   border: {
     borderStyle: "solid",
     borderColor: "black",
@@ -87,11 +70,27 @@ const styles = StyleSheet.create({
     width: "25%",
     fontSize: 16,
   },
-  focus: {
-    backgroundColor: "#d95550",
+  button: {
+    marginTop: 30,
+  },
+  buttonText: {
+    textAlign: "center",
+    fontSize: 16,
   },
   break: {
     backgroundColor: "#2a9d8f",
+  },
+  container: {
+    alignItems: "center",
+  },
+  focus: {
+    backgroundColor: "#d95550",
+  },
+  label: {
+    fontSize: 16,
+    marginVertical: 10,
+    paddingHorizontal: 10,
+    width: "100%",
   },
   wrapper: {
     borderRadius: 5,
