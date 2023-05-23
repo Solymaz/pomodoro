@@ -2,10 +2,10 @@ import { StatusBar } from "expo-status-bar";
 import { useContext, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import CountdownDisplay from "../CountdownDisplay";
-import TimerToggleButton from "../TimerToggleButton";
+import TimerToggleButton from "../components/TimerToggleButton";
 import { TimerContext } from "../context/TimerContext";
 import { TimerModeContext } from "../context/TimerModeContext";
-import TimerMode from "../TimerMode";
+import TimerMode from "../components/TimerMode";
 
 export default function HomeScreen() {
   const { focusMinutes, breakMinutes } = useContext(TimerContext);

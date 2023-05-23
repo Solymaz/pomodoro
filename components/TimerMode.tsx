@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { TimerModeContext } from "./context/TimerModeContext";
+import { TimerModeContext } from "../context/TimerModeContext";
 
 export default function TimerMode(): JSX.Element {
   const { timerMode } = useContext(TimerModeContext);
