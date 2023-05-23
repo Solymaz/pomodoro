@@ -15,7 +15,7 @@ export const TimerModeContext = createContext<TimerModeContext>({
   setTimerMode: () => {},
 });
 
-export default function TimerModesContextProvider({ children }: Props) {
+export default function TimerModeContextProvider({ children }: Props) {
   const [timerMode, setTimerMode] = useState<TimerModes>("Focus");
   return (
     <TimerModeContext.Provider
