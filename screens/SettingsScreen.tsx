@@ -1,11 +1,10 @@
 import React, { useContext, useState } from "react";
 import { Text, TextInput, View, StyleSheet, Pressable } from "react-native";
 import { TimerContext } from "../context/TimerContext";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../App";
+import { useNavigation } from "@react-navigation/native";
 
-type Props = NativeStackScreenProps<RootStackParamList, "Settings">;
-export default function SettingsScreen({ navigation }: Props): JSX.Element {
+export default function SettingsScreen() {
+  const navigation = useNavigation();
   const { focusMinutes, setFocusMinutes, breakMinutes, setBreakMinutes } =
     useContext(TimerContext);
   const [newFocusMinutes, setNewFocusMinutes] = useState<number>(focusMinutes);
@@ -49,7 +48,7 @@ export default function SettingsScreen({ navigation }: Props): JSX.Element {
         onPress={() => {
           setFocusMinutes(newFocusMinutes),
             setBreakMinutes(newBreakMinutes),
-            navigation.pop();
+            navigation.goBack();
         }}
       >
         <Text style={styles.buttonText}>Save</Text>
