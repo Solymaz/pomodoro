@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Text, TextInput, View, StyleSheet, Pressable } from "react-native";
 import { TimerContext } from "../context/TimerContext";
 import { useNavigation } from "@react-navigation/native";
+import ErrorMessage from "../components/ErrorMessage";
 
 export default function SettingsScreen() {
   const navigation = useNavigation();
@@ -9,6 +10,25 @@ export default function SettingsScreen() {
     useContext(TimerContext);
   const [newFocusMinutes, setNewFocusMinutes] = useState<number>(focusMinutes);
   const [newBreakMinutes, setNewBreakMinutes] = useState<number>(breakMinutes);
+  const [showErrMsg, setShowErrMsg] = useState<boolean>(false);
+
+  const handelSubmit = () => {
+    if (
+      newFocusMinutes > 1 &&
+      newFocusMinutes <= 59 &&
+      newBreakMinutes > 1 &&
+      newBreakMinutes <= 59
+    ) {
+      setShowErrMsg(false);
+      setFocusMinutes(newFocusMinutes),
+        setBreakMinutes(newBreakMinutes),
+        navigation.goBack();
+    } else {
+      setShowErrMsg(true);
+      return;
+    }
+  };
+
   return (
     <View
       accessible={true}
@@ -43,20 +63,13 @@ export default function SettingsScreen() {
           clearTextOnFocus={true}
         />
       </View>
-      <Pressable
-        style={[styles.border, styles.button]}
-        onPress={() => {
-          setFocusMinutes(newFocusMinutes),
-            setBreakMinutes(newBreakMinutes),
-            navigation.goBack();
-        }}
-      >
+      {showErrMsg && <ErrorMessage />}
+      <Pressable style={[styles.border, styles.button]} onPress={handelSubmit}>
         <Text style={styles.buttonText}>Save</Text>
       </Pressable>
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   border: {
     borderStyle: "solid",
