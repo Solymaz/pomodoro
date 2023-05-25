@@ -18,7 +18,7 @@ export default function SettingsScreen() {
   const [newFocusMinutes, setNewFocusMinutes] = useState<number>(focusMinutes);
   const [newBreakMinutes, setNewBreakMinutes] = useState<number>(breakMinutes);
   const [showErrMsg, setShowErrMsg] = useState<boolean>(false);
-  
+  const [buttonPressed, setButtonPressed] = useState<boolean>(false);
 
   const handelSubmit = () => {
     if (
@@ -72,7 +72,16 @@ export default function SettingsScreen() {
         />
       </View>
       {showErrMsg && <ErrorMessage />}
-      <Pressable style={[styles.border, styles.button]} onPress={handelSubmit}>
+      <Pressable
+        style={[
+          styles.border,
+          styles.button,
+          buttonPressed && styles.buttonPressed,
+        ]}
+        onPressIn={() => setButtonPressed(true)}
+        onPressOut={() => setButtonPressed(false)}
+        onPress={handelSubmit}
+      >
         <Text style={styles.buttonText}>Save</Text>
       </Pressable>
     </SafeAreaView>
@@ -98,6 +107,9 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
     textAlign: "center",
+  },
+  buttonPressed: {
+    marginTop: 33,
   },
   break: {
     backgroundColor: "#2a9d8f",
