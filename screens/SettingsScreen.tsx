@@ -1,5 +1,12 @@
 import React, { useContext, useState } from "react";
-import { Text, TextInput, View, StyleSheet, Pressable } from "react-native";
+import {
+  Text,
+  TextInput,
+  View,
+  StyleSheet,
+  SafeAreaView,
+  Pressable,
+} from "react-native";
 import { TimerContext } from "../context/TimerContext";
 import { useNavigation } from "@react-navigation/native";
 import ErrorMessage from "../components/ErrorMessage";
@@ -11,6 +18,7 @@ export default function SettingsScreen() {
   const [newFocusMinutes, setNewFocusMinutes] = useState<number>(focusMinutes);
   const [newBreakMinutes, setNewBreakMinutes] = useState<number>(breakMinutes);
   const [showErrMsg, setShowErrMsg] = useState<boolean>(false);
+  
 
   const handelSubmit = () => {
     if (
@@ -30,7 +38,7 @@ export default function SettingsScreen() {
   };
 
   return (
-    <View
+    <SafeAreaView
       accessible={true}
       accessibilityLanguage="en-EN"
       style={styles.container}
@@ -67,7 +75,7 @@ export default function SettingsScreen() {
       <Pressable style={[styles.border, styles.button]} onPress={handelSubmit}>
         <Text style={styles.buttonText}>Save</Text>
       </Pressable>
-    </View>
+    </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
@@ -84,10 +92,12 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 30,
+    backgroundColor: "#2c2f2c",
   },
   buttonText: {
-    textAlign: "center",
+    color: "white",
     fontSize: 16,
+    textAlign: "center",
   },
   break: {
     backgroundColor: "#2a9d8f",

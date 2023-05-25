@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useContext, useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, SafeAreaView } from "react-native";
 import CountdownDisplay from "../components/CountdownDisplay";
 import TimerToggleButton from "../components/TimerToggleButton";
 import { TimerContext } from "../context/TimerContext";
@@ -64,7 +64,7 @@ export default function HomeScreen() {
     timerMode === "Focus" ? focusTimerCount : breakTimerCount
   );
   return (
-    <View
+    <SafeAreaView
       style={[
         styles.container,
         timerMode === "Focus" ? styles.focusMode : styles.breakMode,
@@ -78,7 +78,7 @@ export default function HomeScreen() {
         stopTimer={stopTimer}
       />
       <CountdownDisplay timerDate={timerDate} />
-    </View>
+    </SafeAreaView>
   );
 }
 
