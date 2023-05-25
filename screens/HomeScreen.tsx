@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { useContext, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import CountdownDisplay from "../CountdownDisplay";
+import CountdownDisplay from "../components/CountdownDisplay";
 import TimerToggleButton from "../components/TimerToggleButton";
 import { TimerContext } from "../context/TimerContext";
 import { TimerModeContext } from "../context/TimerModeContext";
