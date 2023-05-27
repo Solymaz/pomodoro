@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { TimerContext } from "../context/TimerContext";
 import { useNavigation } from "@react-navigation/native";
-import ErrorMessage from "../components/ErrorMessage";
+import Toast from "react-native-toast-message";
 
 export default function SettingsScreen() {
   const navigation = useNavigation();
@@ -17,7 +17,6 @@ export default function SettingsScreen() {
     useContext(TimerContext);
   const [newFocusMinutes, setNewFocusMinutes] = useState<number>(focusMinutes);
   const [newBreakMinutes, setNewBreakMinutes] = useState<number>(breakMinutes);
-  const [showErrMsg, setShowErrMsg] = useState<boolean>(false);
   const [buttonPressed, setButtonPressed] = useState<boolean>(false);
 
   const handelSubmit = () => {
@@ -27,13 +26,14 @@ export default function SettingsScreen() {
       newBreakMinutes > 1 &&
       newBreakMinutes <= 59
     ) {
-      setShowErrMsg(false);
       setFocusMinutes(newFocusMinutes),
         setBreakMinutes(newBreakMinutes),
         navigation.goBack();
     } else {
-      setShowErrMsg(true);
-      return;
+      Toast.show({
+        type: "error",
+        text1: "Please Eneter a number between 1 and 59 🙃",
+      });
     }
   };
 
@@ -71,7 +71,7 @@ export default function SettingsScreen() {
           clearTextOnFocus={true}
         />
       </View>
-      {showErrMsg && <ErrorMessage />}
+      <Toast />
       <Pressable
         style={[
           styles.border,
