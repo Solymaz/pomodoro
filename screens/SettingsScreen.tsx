@@ -6,6 +6,8 @@ import {
   StyleSheet,
   SafeAreaView,
   Pressable,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { TimerContext } from "../context/TimerContext";
 import { useNavigation } from "@react-navigation/native";
@@ -38,55 +40,58 @@ export default function SettingsScreen() {
   };
 
   return (
-    <SafeAreaView
-      accessible={true}
-      accessibilityLanguage="en-EN"
-      style={styles.container}
-    >
-      <View style={[styles.focus, styles.wrapper]}>
-        <Text style={styles.label} nativeID="focus minutes">
-          Enter the number of minutes you want to focus 🧠
-        </Text>
-        <TextInput
-          value={newFocusMinutes.toString()}
-          onChangeText={(newTime) => setNewFocusMinutes(Number(newTime))}
-          keyboardType="number-pad"
-          accessibilityLabel="focus minutes input"
-          accessibilityLabelledBy="focus minutes"
-          style={styles.border}
-          clearTextOnFocus={true}
-        />
-      </View>
-      <View style={[styles.break, styles.wrapper]}>
-        <Text style={styles.label} nativeID="break minutes">
-          Enter the number of minutes you want to take a break ☕️
-        </Text>
-        <TextInput
-          value={newBreakMinutes.toString()}
-          onChangeText={(newTime) => setNewBreakMinutes(Number(newTime))}
-          keyboardType="number-pad"
-          accessibilityLabel="break minutes input"
-          accessibilityLabelledBy="break minutes"
-          style={styles.border}
-          clearTextOnFocus={true}
-        />
-      </View>
-      <Toast />
-      <Pressable
-        style={[
-          styles.border,
-          styles.button,
-          buttonPressed && styles.buttonPressed,
-        ]}
-        onPressIn={() => setButtonPressed(true)}
-        onPressOut={() => setButtonPressed(false)}
-        onPress={handelSubmit}
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <SafeAreaView
+        accessible={true}
+        accessibilityLanguage="en-EN"
+        style={styles.container}
       >
-        <Text style={styles.buttonText}>Save</Text>
-      </Pressable>
-    </SafeAreaView>
+        <View style={[styles.focus, styles.wrapper]}>
+          <Text style={styles.label} nativeID="focus minutes">
+            Enter the number of minutes you want to focus 🧠
+          </Text>
+          <TextInput
+            value={newFocusMinutes.toString()}
+            onChangeText={(newTime) => setNewFocusMinutes(Number(newTime))}
+            keyboardType="number-pad"
+            accessibilityLabel="focus minutes input"
+            accessibilityLabelledBy="focus minutes"
+            style={styles.border}
+            clearTextOnFocus={true}
+          />
+        </View>
+        <View style={[styles.break, styles.wrapper]}>
+          <Text style={styles.label} nativeID="break minutes">
+            Enter the number of minutes you want to take a break ☕️
+          </Text>
+          <TextInput
+            value={newBreakMinutes.toString()}
+            onChangeText={(newTime) => setNewBreakMinutes(Number(newTime))}
+            keyboardType="number-pad"
+            accessibilityLabel="break minutes input"
+            accessibilityLabelledBy="break minutes"
+            style={styles.border}
+            clearTextOnFocus={true}
+          />
+        </View>
+        <Toast />
+        <Pressable
+          style={[
+            styles.border,
+            styles.button,
+            buttonPressed && styles.buttonPressed,
+          ]}
+          onPressIn={() => setButtonPressed(true)}
+          onPressOut={() => setButtonPressed(false)}
+          onPress={handelSubmit}
+        >
+          <Text style={styles.buttonText}>Save</Text>
+        </Pressable>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 }
+
 const styles = StyleSheet.create({
   border: {
     borderStyle: "solid",
