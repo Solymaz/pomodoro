@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { useContext, useEffect, useState } from "react";
 import { StyleSheet, SafeAreaView } from "react-native";
+import { Audio } from "expo-av";
 import CountdownDisplay from "../components/CountdownDisplay";
 import TimerToggleButton from "../components/TimerToggleButton";
 import { TimerContext } from "../context/TimerContext";
@@ -16,6 +17,15 @@ export default function HomeScreen() {
   const [breakTimerCount, setBreakTimerCount] = useState(BreakMilliseconds);
   const [timerInterval, setTimerInterval] = useState<NodeJS.Timer | null>(null);
   const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
+  const [sound, setSound] = useState<Audio.Sound>();
+
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../assets/time-is-up.mp3")
+    );
+    setSound(sound);
+    await sound.playAsync();
+  }
 
   useEffect(() => {
     setFocusTimerCount(FocusMilliseconds);
@@ -28,11 +38,13 @@ export default function HomeScreen() {
       setTimerMode("Break");
       setBreakTimerCount(BreakMilliseconds);
       stopTimer();
+      playSound();
     }
     if (timerMode === "Break" && breakTimerCount === 0) {
       setTimerMode("Focus");
       setFocusTimerCount(FocusMilliseconds);
       stopTimer();
+      playSound();
     }
   }, [focusTimerCount, breakTimerCount]);
 
