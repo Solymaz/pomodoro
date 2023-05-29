@@ -27,6 +27,16 @@ export default function HomeScreen() {
     await sound.playAsync();
   }
 
+  // clear sound from memory when the screen is unmounted
+  useEffect(() => {
+    function cleanUp() {
+      if (sound) {
+        sound.unloadAsync();
+      }
+    }
+    return cleanUp;
+  }, [sound]);
+
   useEffect(() => {
     setFocusTimerCount(FocusMilliseconds);
     setBreakTimerCount(BreakMilliseconds);
