@@ -21,9 +21,9 @@ export default function SettingsScreen() {
 
   const handelSubmit = () => {
     if (
-      newFocusMinutes > 1 &&
+      newFocusMinutes >= 1 &&
       newFocusMinutes <= 59 &&
-      newBreakMinutes > 1 &&
+      newBreakMinutes >= 1 &&
       newBreakMinutes <= 59
     ) {
       setFocusMinutes(newFocusMinutes),
