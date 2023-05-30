@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useContext, useEffect, useState } from "react";
-import { StyleSheet, SafeAreaView } from "react-native";
+import { StyleSheet, SafeAreaView, Alert } from "react-native";
 import { Audio } from "expo-av";
 import CountdownDisplay from "../components/CountdownDisplay";
 import TimerToggleButton from "../components/TimerToggleButton";
@@ -18,6 +18,14 @@ export default function HomeScreen() {
   const [timerInterval, setTimerInterval] = useState<NodeJS.Timer | null>(null);
   const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
   const [sound, setSound] = useState<Audio.Sound>();
+
+  useEffect(() => {
+    Alert.alert(
+      "Sound Notification",
+      "Make sure your sound is on if you want to get notified when time is up 🔔",
+      [{ text: "OK" }]
+    );
+  }, []);
 
   async function playSound() {
     const { sound } = await Audio.Sound.createAsync(
